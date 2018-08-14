@@ -6,6 +6,8 @@
 - [Scriptable Object With Modular Effects/Behavior](#scriptable-object-with-modular-effectsbehavior)
 - [If No Need For Varying Items](#if-no-need-for-varying-items)
 - [If Need Varying Items](#if-need-varying-items)
+- [Item Variables/Sub-Values](#item-variablessub-values)
+- [Extras](#extras)
 
 ## Item Setup with Scriptable Objects
 
@@ -46,3 +48,28 @@ Have two Item types:
 The Inventory stores a `List<Item>` which allows for passing around of `Item`s with durability/varying values. Add/Get returns the actual `Item`.  
 There is a `Database`, which is a singleton/prefab with a `Dictionary` (in Inspector) with references to `ItemSO`s and their string/int ID.  
 Then when you want to CREATE a new Item, you call `Database`'s CreateItem method with a string/int ID. The Database will fetch all the values from the `ItemSO` and copy them to a new `Item` object which is returned.  
+
+## Item Variables/Sub-Values
+
+If you want to make it extra modular, the item can have a `List<VariableOverride>`, which allows the item to be modified through external "behaviors."
+
+![Image of the Code](VariableOverride.png)
+
+Basically, there are two types:
+
+- `Variable` which are `Scriptable Objects` that act like enum + type definition, they are used to create the possible variable overrides and identify them. They are not directly used by the item.
+- `VariableOverride` which are like the "instance" of a `Variable` type. These will have a value and are assigned to the Item.
+
+You can then use the `Variable` ScriptableObjects to create new types. Put them all in a folder. To store them (this replaces the need to code them). 
+
+![Screenshot of Variables in Editor](ListVariables.png)
+
+You then give the `Item` a `List<VariableOverride>` and then you create a custom inspector so that the VariableOverride uses the type from the `Variable` possibilities/types. This allows you to have the Variables act just like in [this GIF](https://streamable.com/926i5).
+
+Resources:
+
+- [Example of Custom Inspectors using VariableOverride](Variable-And-Override.cs)
+
+## Extras
+
+If the link to the [Item ScriptableObject GIF](https://streamable.com/926i5) does not work, check out the mp4 of it here [](InventoryExampleEditor.mp4).
