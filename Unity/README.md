@@ -11,7 +11,7 @@
 
 If you want to make the invetory system with Scriptable Object, look at this system.
 
-![Image](ModularItemSo.png)
+![Image of Item Code](ModularItemSO.png)
 
 ### Scriptable Object With Modular Effects/Behavior
 
